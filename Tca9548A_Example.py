@@ -16,8 +16,8 @@ multiplexerChannelNr7 = 7
 #create yout 
 tca = Tca9548A(i2cBus = i2cBus, address = tcaAddress)
 #get the channel your i2c device is connected to 
-bus0 = tca.getCannel(multiplexerChannelNr0)
-bus7 = tca.getCannel(multiplexerChannelNr7)
+bus0 = tca.getChannel(multiplexerChannelNr0)
+bus7 = tca.getChannel(multiplexerChannelNr7)
 #your bus0 to bus7 behave exactly the same way your smbus2.SMBus(1) would do.
 b = bus0.read_byte_data(80, 0)
 print(b)

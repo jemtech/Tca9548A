@@ -21,11 +21,11 @@ class Tca9548A(object):
         else:
             self.bus = i2cBus
             
-    def getCannel(self, channel):
+    def getChannel(self, channel):
         '''
-        returns the Tca9548ACannel for communication
+        returns the Tca9548AChannel for communication
         '''
-        return Tca9548ACannel(self,channel)
+        return Tca9548AChannel(self,channel)
     
     def disable(self):
         '''
@@ -33,13 +33,13 @@ class Tca9548A(object):
         '''
         self.bus.write_byte(self.address, 0)
     
-    def openCannel(self, channel):
+    def openChannel(self, channel):
         '''
         activates the selected output 0 to 8 is possible
         '''
         self.bus.write_byte(self.address, channel)
 
-class Tca9548ACannel(object):
+class Tca9548AChannel(object):
     '''
     use like smbus2
     thread safe i2c bus wrapper
@@ -57,7 +57,7 @@ class Tca9548ACannel(object):
     def __transaction(self, method, *args, **kwargs):
         lock.acquire()
         try:
-            self.tca9548A.openCannel(self.channel)
+            self.tca9548A.openChannel(self.channel)
             result = method(*args, **kwargs)
             self.tca9548A.disable()
         finally:
